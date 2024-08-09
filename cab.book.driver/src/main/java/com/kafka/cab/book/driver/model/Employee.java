@@ -19,15 +19,16 @@ public class Employee {
     String Email;
 
 
-
-
-
-
-//    Integer ID =1;
-//    String Name="Md. Ariful Islam";
-//    String Address="Dhaka";
-//    String Phone="01780982495";
-//    String Email="abc@gmail.com";
+//    @Override
+//    public String toString() {
+//        return "Employee{" +
+//                "id=" + ID +
+//                ", name='" +Name + '\'' +
+//                ", address='" + Address + '\'' +
+//                ", phone='" + Phone + '\'' +
+//                ", email='" + Email + '\'' +
+//                '}';
+//    }
 
 
 }
