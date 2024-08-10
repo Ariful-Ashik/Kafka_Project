@@ -11,6 +11,7 @@
     <groupId>com.kafka</groupId>
     <artifactId>cab.book.user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>cab.book.user</name>
     <description>Demo project for Spring Boot</description>
     <url/>
@@ -37,6 +38,16 @@
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.15.0</version> <!-- Check for the latest version -->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.0</version> <!-- Check for the latest version -->
         </dependency>
 
         <dependency>

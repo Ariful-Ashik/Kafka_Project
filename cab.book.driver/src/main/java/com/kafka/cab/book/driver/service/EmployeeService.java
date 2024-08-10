@@ -1,7 +1,12 @@
 package com.kafka.cab.book.driver.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kafka.cab.book.driver.Constant.AppConstant;
 import com.kafka.cab.book.driver.model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 
@@ -12,7 +17,13 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
-    private List<Employee> employees = new ArrayList<>();
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+    private final List<Employee> employees = new ArrayList<>();
 
     public EmployeeService() {
         // Initialize with some employee details
@@ -22,18 +33,43 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployees() {
+        String employeeJson = null;
+        try {
+            employeeJson = objectMapper.writeValueAsString(employees);
+            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return employees;
     }
+
+    public Employee addEmployee(Employee employee) {
+        employees.add(employee);
+
+//
+        try {
+            String employeeJson = objectMapper.writeValueAsString(employees);
+//            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
+            kafkaTemplate.
+                    send(AppConstant.CAB_LOCATION, employees);
+
+        }
+        catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return employee;
+
+    }
+
+
+
+//  ------------------------
 
     public Optional<Employee> getEmployeeById(Integer id) {
         return employees.stream()
                 .filter(employee -> employee.getID().equals(id))
                 .findFirst();
-    }
-
-    public Employee addEmployee(Employee employee) {
-        employees.add(employee);
-        return employee;
     }
 
     public Optional<Employee> updateEmployee(Integer id, Employee employeeDetails) {

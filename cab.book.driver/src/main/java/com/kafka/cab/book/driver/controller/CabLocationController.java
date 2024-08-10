@@ -1,6 +1,6 @@
 package com.kafka.cab.book.driver.controller;
 
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kafka.cab.book.driver.model.Employee;
 import com.kafka.cab.book.driver.service.CabLocationService;
 import com.kafka.cab.book.driver.service.EmployeeService;
@@ -25,22 +25,20 @@ public class CabLocationController {
     @Autowired
     private EmployeeService employeeService;
 
-
-
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
+    }
+
+    @PostMapping
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return employeeService.addEmployee(employee);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
         Optional<Employee> employee = employeeService.getEmployeeById(id);
         return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
     }
 
     @PutMapping("/{id}")
@@ -54,7 +52,6 @@ public class CabLocationController {
         boolean deleted = employeeService.deleteEmployee(id);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
-
 
 
 

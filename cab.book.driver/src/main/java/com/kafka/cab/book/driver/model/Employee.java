@@ -18,17 +18,16 @@ public class Employee {
     String Phone;
     String Email;
 
-
-//    @Override
-//    public String toString() {
-//        return "Employee{" +
-//                "id=" + ID +
-//                ", name='" +Name + '\'' +
-//                ", address='" + Address + '\'' +
-//                ", phone='" + Phone + '\'' +
-//                ", email='" + Email + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + ID +
+                ", name='" +Name + '\'' +
+                ", address='" + Address + '\'' +
+                ", phone='" + Phone + '\'' +
+                ", email='" + Email + '\'' +
+                '}';
+    }
 
 
 }
