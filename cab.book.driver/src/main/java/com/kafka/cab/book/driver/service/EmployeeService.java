@@ -10,6 +10,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,7 @@ public class EmployeeService {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     private final List<Employee> employees = new ArrayList<>();
 
@@ -33,36 +34,39 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployees() {
-        String employeeJson = null;
-        try {
-            employeeJson = objectMapper.writeValueAsString(employees);
-            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//        String employeeJson = null;
+//        try {
+//            employeeJson = objectMapper.writeValueAsString(employees);
+//            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
+//
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
         return employees;
     }
 
+    //    The error you're encountering indicates that Kafka is attempting to serialize
+    //    an Employee object using StringSerializer, which is incompatible because
+    //    StringSerializer expects a String, not a complex object like Employee.
     public Employee addEmployee(Employee employee) {
+//        kafkaTemplate.
+//                send(AppConstant.CAB_LOCATION+"XX", employee);
         employees.add(employee);
-
 //
-        try {
-            String employeeJson = objectMapper.writeValueAsString(employees);
+//        try {
+//            String employeeJson = objectMapper.writeValueAsString(employee);
 //            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
-            kafkaTemplate.
-                    send(AppConstant.CAB_LOCATION, employees);
-
-        }
-        catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//            kafkaTemplate.
+//                    send(AppConstant.CAB_LOCATION, employeeJson);
+//
+//        }
+//        catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        return employee;
+        System.out.println(employee);
         return employee;
-
     }
-
-
 
 //  ------------------------
 

@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9a07d98-382e-4a3f-9850-ab93cbb9c229" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="d9a07d98-382e-4a3f-9850-ab93cbb9c229" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/config/CorsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cab.book.driver/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.driver/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/config/KafkaConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/controller/CabLocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/controller/CabLocationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/model/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cab.book.user/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.user/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cab.book.user/src/main/java/com/kafka/cab/book/user/service/LocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cab.book.user/src/main/java/com/kafka/cab/book/user/service/LocationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723222082800</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update">
+      <option name="closed" value="true" />
+      <created>1723280217185</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723280217186</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,17 +198,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cab.book.driver/src/main/java/com/kafka/cab/book/driver/service/EmployeeService.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

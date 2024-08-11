@@ -25,10 +25,19 @@ public class CabLocationController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping
+
+//    @GetMapping("/getAll")
+//    public ResponseEntity<List<Employee>> getAllEmployees() {
+//        List<Employee> employees = employeeService.getAllEmployees();
+//        return ResponseEntity.ok(employees);
+//    }
+
+
+    @GetMapping("/getAll")
     public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
-    }
+//        List<Employee> employee = employeeService.getAllEmployees();
+//        return employee.stream().map(ResponseEntity::ok).findAny().orElseGet(() -> ResponseEntity.notFound().build());
+        return employeeService.getAllEmployees();}
 
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
