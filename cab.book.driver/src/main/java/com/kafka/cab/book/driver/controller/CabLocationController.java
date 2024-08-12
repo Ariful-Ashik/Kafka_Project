@@ -26,41 +26,45 @@ public class CabLocationController {
     private EmployeeService employeeService;
 
 
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employees);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+        return ResponseEntity.ok(savedEmployee);
+    }
 //    @GetMapping("/getAll")
-//    public ResponseEntity<List<Employee>> getAllEmployees() {
-//        List<Employee> employees = employeeService.getAllEmployees();
-//        return ResponseEntity.ok(employees);
+//    public List<Employee> getAllEmployees() {
+////        List<Employee> employee = employeeService.getAllEmployees();
+////        return employee.stream().map(ResponseEntity::ok).findAny().orElseGet(() -> ResponseEntity.notFound().build());
+//        return employeeService.getAllEmployees();}
+//
+//    @PostMapping
+//    public Employee addEmployee(@RequestBody Employee employee) {
+//        return employeeService.addEmployee(employee);
 //    }
 
-
-    @GetMapping("/getAll")
-    public List<Employee> getAllEmployees() {
-//        List<Employee> employee = employeeService.getAllEmployees();
-//        return employee.stream().map(ResponseEntity::ok).findAny().orElseGet(() -> ResponseEntity.notFound().build());
-        return employeeService.getAllEmployees();}
-
-    @PostMapping
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
-        Optional<Employee> employee = employeeService.getEmployeeById(id);
-        return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee employeeDetails) {
-        Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
-        return updatedEmployee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Integer id) {
-        boolean deleted = employeeService.deleteEmployee(id);
-        return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
+//        Optional<Employee> employee = employeeService.getEmployeeById(id);
+//        return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+//    }
+//
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee employeeDetails) {
+//        Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
+//        return updatedEmployee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteEmployee(@PathVariable Integer id) {
+//        boolean deleted = employeeService.deleteEmployee(id);
+//        return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+//    }
 
 
 

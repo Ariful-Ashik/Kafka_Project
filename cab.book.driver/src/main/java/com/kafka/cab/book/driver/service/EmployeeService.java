@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kafka.cab.book.driver.Constant.AppConstant;
 import com.kafka.cab.book.driver.model.Employee;
+import com.kafka.cab.book.driver.repo.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -18,32 +19,50 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
+//    @Autowired
+//    private ObjectMapper objectMapper;
+
     @Autowired
-    private ObjectMapper objectMapper;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    private final List<Employee> employees = new ArrayList<>();
-
-    public EmployeeService() {
-        // Initialize with some employee details
-        employees.add(new Employee(1, "John Doe", "123 Main St", "555-1234", "john.doe@example.com"));
-        employees.add(new Employee(2, "Jane Smith", "456 Elm St", "555-5678", "jane.smith@example.com"));
-        employees.add(new Employee(3, "Alice Johnson", "789 Oak St", "555-9012", "alice.johnson@example.com"));
-    }
 
     public List<Employee> getAllEmployees() {
-//        String employeeJson = null;
-//        try {
-//            employeeJson = objectMapper.writeValueAsString(employees);
-//            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
-//
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-        return employees;
+        return employeeRepository.findAll();
     }
+    public Employee saveEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public List<Employee> getAllEmployees() {
+////        String employeeJson = null;
+////        try {
+////            employeeJson = objectMapper.writeValueAsString(employees);
+////            kafkaTemplate.send(AppConstant.CAB_LOCATION, employeeJson);
+////
+////        } catch (JsonProcessingException e) {
+////            e.printStackTrace();
+////        }
+//        return employees;
+//    }
 
     //    The error you're encountering indicates that Kafka is attempting to serialize
     //    an Employee object using StringSerializer, which is incompatible because
@@ -51,7 +70,7 @@ public class EmployeeService {
     public Employee addEmployee(Employee employee) {
 //        kafkaTemplate.
 //                send(AppConstant.CAB_LOCATION+"XX", employee);
-        employees.add(employee);
+        employeeRepository.save(employee);
 //
 //        try {
 //            String employeeJson = objectMapper.writeValueAsString(employee);
@@ -70,24 +89,24 @@ public class EmployeeService {
 
 //  ------------------------
 
-    public Optional<Employee> getEmployeeById(Integer id) {
-        return employees.stream()
-                .filter(employee -> employee.getID().equals(id))
-                .findFirst();
-    }
+//    public Optional<Employee> getEmployeeById(Integer id) {
+//        return employees.stream()
+//                .filter(employee -> employee.getID().equals(id))
+//                .findFirst();
+//    }
 
-    public Optional<Employee> updateEmployee(Integer id, Employee employeeDetails) {
-        return getEmployeeById(id).map(employee -> {
-            employee.setName(employeeDetails.getName());
-            employee.setAddress(employeeDetails.getAddress());
-            employee.setPhone(employeeDetails.getPhone());
-            employee.setEmail(employeeDetails.getEmail());
-            return employee;
-        });
-    }
+//    public Optional<Employee> updateEmployee(Integer id, Employee employeeDetails) {
+//        return getEmployeeById(id).map(employee -> {
+//            employee.setName(employeeDetails.getName());
+//            employee.setAddress(employeeDetails.getAddress());
+//            employee.setPhone(employeeDetails.getPhone());
+//            employee.setEmail(employeeDetails.getEmail());
+//            return employee;
+//        });
+//    }
 
-    public boolean deleteEmployee(Integer id) {
-        return employees.removeIf(employee -> employee.getID().equals(id));
-    }
+//    public boolean deleteEmployee(Long id) {
+//        return employees.removeIf(employee -> employee.getId().equals(id));
+//    }
 }
 
