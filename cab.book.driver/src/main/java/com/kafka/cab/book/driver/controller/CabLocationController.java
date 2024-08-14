@@ -2,7 +2,8 @@ package com.kafka.cab.book.driver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kafka.cab.book.driver.model.Employee;
-import com.kafka.cab.book.driver.service.CabLocationService;
+//import com.kafka.cab.book.driver.service.CabLocationService;
+import com.kafka.cab.book.driver.repo.EmployeeRepository;
 import com.kafka.cab.book.driver.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,12 +20,14 @@ import java.util.Optional;
 
 public class CabLocationController {
 
-    @Autowired
-    private CabLocationService cabLocationService;
+//    @Autowired
+//    private CabLocationService cabLocationService;
 
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Employee>> getAllEmployees() {
@@ -37,6 +40,23 @@ public class CabLocationController {
         Employee savedEmployee = employeeService.saveEmployee(employee);
         return ResponseEntity.ok(savedEmployee);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails) {
+        Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
+        return updatedEmployee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+        boolean deleted = employeeService.deleteEmployee(id);
+        if (deleted) {
+            return ResponseEntity.ok("Employee deleted successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 //    @GetMapping("/getAll")
 //    public List<Employee> getAllEmployees() {
 ////        List<Employee> employee = employeeService.getAllEmployees();
@@ -54,18 +74,6 @@ public class CabLocationController {
 //        return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 //    }
 //
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee employeeDetails) {
-//        Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
-//        return updatedEmployee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteEmployee(@PathVariable Integer id) {
-//        boolean deleted = employeeService.deleteEmployee(id);
-//        return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
-//    }
-
 
 
 //    @PostMapping("/{text}")

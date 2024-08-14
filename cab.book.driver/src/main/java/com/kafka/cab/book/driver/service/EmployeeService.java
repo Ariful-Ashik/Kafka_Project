@@ -7,8 +7,11 @@ import com.kafka.cab.book.driver.Constant.AppConstant;
 import com.kafka.cab.book.driver.model.Employee;
 import com.kafka.cab.book.driver.repo.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.sql.SQLOutput;
@@ -22,34 +25,32 @@ public class EmployeeService {
 //    @Autowired
 //    private ObjectMapper objectMapper;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
-
+//    @Autowired
+//    private KafkaTemplate<String, String> kafkaTemplate;
+@Autowired
+private EmployeeRepository employeeRepository;
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
+
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
+    public Optional<Employee> updateEmployee(Long id, Employee employeeDetails) {
+        return getEmployeeById(id).map(employee -> {
+            employee.setName(employeeDetails.getName());
+            employee.setAddress(employeeDetails.getAddress());
+            employee.setPhone(employeeDetails.getPhone());
+            employee.setEmail(employeeDetails.getEmail());
+            return employeeRepository.save(employee);  // Save the updated employee
+        });
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Optional<Employee> getEmployeeById(Long id) {
+        return employeeRepository.findById(id);
+    }
 
 
 //    public List<Employee> getAllEmployees() {
@@ -95,18 +96,15 @@ public class EmployeeService {
 //                .findFirst();
 //    }
 
-//    public Optional<Employee> updateEmployee(Integer id, Employee employeeDetails) {
-//        return getEmployeeById(id).map(employee -> {
-//            employee.setName(employeeDetails.getName());
-//            employee.setAddress(employeeDetails.getAddress());
-//            employee.setPhone(employeeDetails.getPhone());
-//            employee.setEmail(employeeDetails.getEmail());
-//            return employee;
-//        });
-//    }
+    public boolean deleteEmployee(Long id) {
+        if (employeeRepository.existsById(id)) {
+            employeeRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
-//    public boolean deleteEmployee(Long id) {
-//        return employees.removeIf(employee -> employee.getId().equals(id));
-//    }
+
+
 }
 

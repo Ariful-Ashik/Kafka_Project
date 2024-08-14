@@ -16,11 +16,9 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    Integer ID;
     String Name;
     String Address;
     String Phone;
